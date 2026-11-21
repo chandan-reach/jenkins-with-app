@@ -1,0 +1,31 @@
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Deploy Express') {
+            steps {
+                echo 'Starting Express deployment...'
+
+                sh 'sudo -u ubuntu /usr/local/bin/deploy-express'
+            }
+        }
+
+        stage('Verify Deployment') {
+            steps {
+                sh 'sudo -u ubuntu pm2 list'
+                echo 'Express deployment completed!'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Express deployment successful!'
+        }
+
+        failure {
+            echo 'Express deployment failed!'
+        }
+    }
+}

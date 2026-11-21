@@ -13,7 +13,7 @@ pipeline {
 
         stage('Verify Deployment') {
             steps {
-                sh 'sudo -u ubuntu /usr/bin/pm2 list'
+                sh 'sudo -u ubuntu env HOME=/home/ubuntu /usr/bin/pm2 list'
                 echo 'Flask deployment completed!'
             }
         }
